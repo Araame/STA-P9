@@ -1,4 +1,23 @@
 {% extends 'base.html' %}
+
+{% load static %}
 {% block content %}
     <p>hello</p>
+<h1>Dashboard</h1>
+
+<form method="POST" action="{% url 'week_summarize' %}">
+    {% csrf_token %}
+    <button type="submit">Generate summary</button>
+</form>
+
+<div>
+    <h3>Weekly AI Summary</h3>
+
+    {% if resume %}
+        <p>{{ resume }}</p>
+    {% else %}
+        <p>No summary available.</p>
+    {% endif %}
+</div>
+<hr>
 {% endblock %}
