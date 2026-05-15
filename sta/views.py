@@ -68,7 +68,7 @@ def week_summarize(request):
 
     if request.method == "POST":
         notes = Note.objects.filter(owner =request.user)
-        notes_text = "\n".join([f"- {note.title}: {note.description}" for note in notes])
+        notes_text = "\n".join([f"{note.title}: {note.description}" for note in notes])
 
         response = ollama.chat(
             model="llama3.2",
