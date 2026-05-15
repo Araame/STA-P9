@@ -21,10 +21,12 @@ class Category(models.Model):
 class Note (models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField()
-    image = models.ImageField(upload_to= "media/images")
+    image = models.ImageField(upload_to= "images/")
     date = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+
 
     def __str__(self):
         return self.title

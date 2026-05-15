@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <p class="text-danger">Voulez-vous supprimer ce commentaire ?</p>
+                </div>
+                <button type="submit" class="btn btn-primary" w-100">Supprimer</button>
+                <a href="{% url 'list_notes' %}">Cancel</a>
+            </form>
+
+{% endblock %}
