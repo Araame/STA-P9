@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Detail Note {% endblock %}
+
+
+{% block content %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title h4 mb-3 text-dark">
+                {{ note.title }}
+            </h2>
+            <p>
+                {% if note.category|lower == 'bug' %}
+                    <span class="badge bg-danger rounded-pill px-3 py-2 text-uppercase">{{ note.category }}</span>
+                {% elif note.category|lower == 'sprint' %}
+                    <span class="badge bg-success rounded-pill px-3 py-2 text-uppercase">{{ note.category }}</span>
+                {% elif note.category|lower == 'veille' %}
+                    <span class="badge bg-primary rounded-pill px-3 py-2 text-uppercase">{{ note.category }}</span>
+                {% endif %}
+            </p>
+            {% if note.image %}
+                <div class="mb-3 text-center">
+                    <img src="{{ note.image.url }}" alt="{{ note.title }}" class="img-fluid rounded border shadow-sm" style="max-height: 400px; object-fit: cover; width: 100%;">
+                </div>
+            {% endif %}
+            
+            <p class="card-text text-secondary" style="white-space: pre-line;">
+                {{ note.description }}
+            </p>
+
+            <p class="card-subtitle mb-3 text-muted small">
+                <i class="bi bi-calendar3"></i> {{ note.date}}
+            </p>
+            
+            <hr class="text-muted">
+
+            <div class="d-flex justify-content-start gap-2">
+                <a href="{% url 'modify' note.id %}" class="btn btn-sm btn-outline-warning">Modify</a>
+                <a href="{% url 'delete' note.id %}" class="btn btn-sm btn-outline-danger">Update</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

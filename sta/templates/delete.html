@@ -1,15 +1,41 @@
 {% extends 'base.html' %}
-
+{% block title %} Deleting Note {% endblock %}
 
 {% block content %}
+<div class="container-fluid px-4 py-3 ">
+    
+    <div class="mb-4">
+        <h1 class="text-dark fw-bold h3 text-center">Delete Note</h1>
+    </div>
 
-<form method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <p class="text-danger">Voulez-vous supprimer ce commentaire ?</p>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            
+            <div class="bg-white rounded-3 shadow-sm p-4 border border-light">
+                
+                <div class="mb-4">
+                    <h5 class="text-dark fw-semibold mb-2">Are you sure?</h5>
+                    <p class="text-secondary small mb-0">
+                        You are about to delete this note. This action cannot be undone.
+                    </p>
                 </div>
-                <button type="submit" class="btn btn-primary" w-100">Supprimer</button>
-                <a href="{% url 'list_notes' %}">Cancel</a>
-            </form>
 
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="d-flex justify-content-start align-items-center gap-3">
+                        <button type="submit" class="btn btn-danger px-4 py-2 text-uppercase fw-bold" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                            Delete
+                        </button>
+                        <a href="{% url 'list_notes' %}" class="btn btn-outline-secondary px-4 py-2 text-uppercase fw-bold bg-white text-secondary border-secondary-subtle" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
 {% endblock %}

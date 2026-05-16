@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
-{% block title %} My Notes {% endblock %}
-
-
+{% block title %} All notes {% endblock %}
 {% block content %}
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <h1 class="text-dark fw-bold">My Notes</h1>
-        <a href="{% url 'add' %}" class="btn btn-primary btn border-radius-20"><i class="bi bi-plus"></i>NEW NOTE</a>
+        <h1 class="text-dark fw-bold">All Notes</h1>
+        <a href="{%url 'add'%}" class="btn btn-primary btn border-radius-20"><i class="bi bi-plus"></i>NEW NOTE</a>
     </div>
 
-    <table class="mb-3 bg-white table table-lg align-middle">
+    <table class="mb-3 bg-white table table-lg">
         <tr class="bg-muted border-bottom">
             <th>#</th>
             <th>Title</th>
             <th>Category</th>
             <th>Date</th>
+            <th>Owner</th>
             <th>Actions</th>
         </tr>
         {% for note in notes %}
-        <tr class="border-bottom border-muted h-5vh">
+        <tr class=" border-bottom border-muted h-5vh">
             <td>{{note.id}}</td>
             <td>{{note.title}}</td>
             <td>
@@ -30,11 +29,17 @@
                 {% endif %}
             </td>
             <td>{{note.date}}</td>
-            <td>
-                <a href="{% url 'detail' note.id %}" class="me-2"><i class="bi bi-eye-fill text-warning"></i></a>
-                <a href="{% url 'modify' note.id %}" class="me-2"><i class="bi bi-pencil-fill text-muted"></i></a>
-                <a href="{% url 'delete' note.id %}"><i class="bi bi-trash2-fill text-danger"></i></a>
-            </td>
+            <td>{{note.owner|capfirst}}</td>
+            {% if user == note.owner %}
+                <td>
+                    <a href="{% url 'detail' note.id %}"><i class="bi bi-eye-fill text-warning"></i></a>
+                    <a href="{% url 'modify' note.id %}"><i class="bi bi-pencil-fill text-muted"></i></a>
+                    <a href="{% url 'delete' note.id %}"><i class="bi bi-trash2-fill text-danger"></i></a>
+                </td>
+            {% else %}
+                <td>No action.</td>
+            {% endif %}
+
         </tr>
         {% endfor %}
     </table>
